@@ -10,7 +10,7 @@ function special_menu_item_class_form_alter(&$form, &$form_state, $form_id) {
       '#title' => t('CSS class for this menu item'),
       '#description' => t('It\'s very useful when you want to build differnce menu item. Please sperate each class with space.'),
       '#size' => '30',
-      '#default_value' => isset($form['menu']['options']['#value']['attributes']['class']) ? $form['menu']['options']['#value']['attributes']['class'] : '',
+      '#default_value' => isset($form['options']['#value']['attributes']['class']) ? implode(' ' ,$form['options']['#value']['attributes']['class']) : '',
     );
     $form['#validate'][] = 'special_menu_item_class_validate';
   }
@@ -20,6 +20,7 @@ function special_menu_item_class_form_alter(&$form, &$form_state, $form_id) {
  * Submit hanlder for add special class
  */
 function special_menu_item_class_validate(&$form, &$form_state) {
-  $item = &$form_state['values']['menu'];
-  $item['options']['attributes']['class'] = $form_state['values']['special_menu_item_class'];
+  $item = &$form_state['values'];
+  $item['options']['attributes']['class'] = explode(' ' ,$form_state['values']['special_menu_item_class']);
+	dpm($item);
 }

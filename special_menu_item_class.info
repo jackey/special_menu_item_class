@@ -1,4 +1,4 @@
 ;$id
 name = Special Menu Item Class
 description = Provide option for menu item and can add special css class for it.
-core = 6.x
+core = 7.x
